@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PauseFullLineFilterTest {
+class DurationPauseFullLineFilterTest {
 
     @Test
     void filter() {
@@ -21,16 +21,19 @@ class PauseFullLineFilterTest {
                 "[2020-08-05T14:32:13.479-0300] GC(4) User=0.03s Sys=0.01s Real=0.01s",
                 "[2020-08-05T14:32:13.479-0300] GC(5) Pause Full (Metadata GC Threshold)",
                 "[2020-08-05T14:32:13.479-0300] GC(5) Marking Phase",
-                "[2020-08-05T14:32:13.492-0300] GC(5) Marking Phase 13.285ms"
+                "[2020-08-05T14:32:13.492-0300] GC(5) Marking Phase 13.285ms",
+                "[2020-08-05T14:32:15.152-0300] GC(7) Metaspace: 55460K->55460K(1101824K)",
+                "[2020-08-05T14:32:15.152-0300] GC(7) Pause Full (Metadata GC Threshold) 33M->32M(217M) 123.234ms",
+                "[2020-08-05T14:32:15.152-0300] GC(7) User=0.39s Sys=0.01s Real=0.12s",
+                "[2020-08-05T14:32:18.145-0300] GC(8) Pause Young (Allocation Failure)"
         );
 
         List<String> expectedLines = List.of(
-                "[2020-08-05T14:32:12.285-0300] GC(2) Pause Full (Metadata GC Threshold)",
                 "[2020-08-05T14:32:12.313-0300] GC(2) Pause Full (Metadata GC Threshold) 6M->6M(153M) 28.641ms",
-                "[2020-08-05T14:32:13.479-0300] GC(5) Pause Full (Metadata GC Threshold)"
+                "[2020-08-05T14:32:15.152-0300] GC(7) Pause Full (Metadata GC Threshold) 33M->32M(217M) 123.234ms"
         );
 
-        PauseFullLineFilter filter = new PauseFullLineFilter();
+        DurationPauseFullLineFilter filter = new DurationPauseFullLineFilter();
 
         assertThat(filter.filter(inputLines))
                 .containsExactlyElementsOf(expectedLines);
