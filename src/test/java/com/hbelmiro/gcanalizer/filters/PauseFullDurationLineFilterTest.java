@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DurationPauseFullLineFilterTest {
+class PauseFullDurationLineFilterTest {
 
     @Test
     void filter() {
@@ -33,7 +33,7 @@ class DurationPauseFullLineFilterTest {
                 "[2020-08-05T14:32:15.152-0300] GC(7) Pause Full (Metadata GC Threshold) 33M->32M(217M) 123.234ms"
         );
 
-        DurationPauseFullLineFilter filter = new DurationPauseFullLineFilter();
+        PauseFullDurationLineFilter filter = new PauseFullDurationLineFilter();
 
         assertThat(filter.filter(inputLines))
                 .containsExactlyElementsOf(expectedLines);
