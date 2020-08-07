@@ -1,12 +1,18 @@
 package com.hbelmiro.gcanalizer.filters;
 
+import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
+import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@QuarkusTest
 class PauseFullDurationLineFilterTest {
+
+    @Inject
+    PauseFullDurationLineFilter filter;
 
     @Test
     void filter() {
@@ -33,9 +39,7 @@ class PauseFullDurationLineFilterTest {
                 "[2020-08-05T14:32:15.152-0300] GC(7) Pause Full (Metadata GC Threshold) 33M->32M(217M) 123.234ms"
         );
 
-        PauseFullDurationLineFilter filter = new PauseFullDurationLineFilter();
-
-        assertThat(filter.filter(inputLines))
+        assertThat(this.filter.filter(inputLines))
                 .containsExactlyElementsOf(expectedLines);
     }
 

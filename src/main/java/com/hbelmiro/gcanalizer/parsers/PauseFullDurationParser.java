@@ -2,11 +2,13 @@ package com.hbelmiro.gcanalizer.parsers;
 
 import com.hbelmiro.gcanalizer.model.PauseFullDuration;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+@ApplicationScoped
 public class PauseFullDurationParser {
 
     public static final String DATE_TIME_FORMAT = "y-M-d'T'H:mm:ss.SSSZ";
@@ -23,7 +25,7 @@ public class PauseFullDurationParser {
 
         Duration duration = Duration.ofNanos(nanos.longValue());
 
-        return new PauseFullDuration(dateTime, duration);
+        return PauseFullDuration.createPauseFullDuration(dateTime, duration);
     }
 
 }

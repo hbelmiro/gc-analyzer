@@ -1,8 +1,10 @@
 package com.hbelmiro.gcanalizer.filters;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ApplicationScoped
 public class PauseFullDurationLineFilter {
 
     public List<String> filter(List<String> lines) {

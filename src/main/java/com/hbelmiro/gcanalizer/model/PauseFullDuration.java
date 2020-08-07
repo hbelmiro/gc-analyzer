@@ -1,5 +1,9 @@
 package com.hbelmiro.gcanalizer.model;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Initialized;
+import javax.enterprise.inject.Vetoed;
+import javax.inject.Inject;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -10,9 +14,13 @@ public class PauseFullDuration {
 
     private final Duration duration;
 
-    public PauseFullDuration(ZonedDateTime dateTime, Duration duration) {
+    private PauseFullDuration(ZonedDateTime dateTime, Duration duration) {
         this.dateTime = dateTime;
         this.duration = duration;
+    }
+
+    public static PauseFullDuration createPauseFullDuration(ZonedDateTime dateTime, Duration duration) {
+        return new PauseFullDuration(dateTime, duration);
     }
 
     public ZonedDateTime getDateTime() {
