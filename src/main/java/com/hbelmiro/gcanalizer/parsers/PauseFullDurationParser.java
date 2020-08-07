@@ -12,9 +12,14 @@ public class PauseFullDurationParser {
     public static final String DATE_TIME_FORMAT = "y-M-d'T'H:mm:ss.SSSZ";
 
     public PauseFullDuration parse(String text) {
-        ZonedDateTime dateTime = ZonedDateTime.parse(text.substring(1, 29), DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+        ZonedDateTime dateTime = ZonedDateTime.parse(
+                text.substring(1, 29),
+                DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)
+        );
 
-        BigDecimal nanos = new BigDecimal(text.substring(text.indexOf(")", text.indexOf("->")) + 2, text.length() - 2)).multiply(new BigDecimal(1000000));
+        String durationStringInMillis = text.substring(text.indexOf(")", text.indexOf("->")) + 2, text.length() - 2);
+
+        BigDecimal nanos = new BigDecimal(durationStringInMillis).multiply(new BigDecimal(1000000));
 
         Duration duration = Duration.ofNanos(nanos.longValue());
 
