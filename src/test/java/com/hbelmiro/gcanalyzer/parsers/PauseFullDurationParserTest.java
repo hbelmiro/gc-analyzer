@@ -1,6 +1,6 @@
-package com.hbelmiro.gcanalizer.parsers;
+package com.hbelmiro.gcanalyzer.parsers;
 
-import com.hbelmiro.gcanalizer.model.PauseFullDuration;
+import com.hbelmiro.gcanalyzer.model.PauseFullDuration;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 

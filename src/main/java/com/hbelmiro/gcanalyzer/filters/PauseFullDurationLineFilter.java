@@ -1,4 +1,4 @@
-package com.hbelmiro.gcanalizer.filters;
+package com.hbelmiro.gcanalyzer.filters;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;

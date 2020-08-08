@@ -1,6 +1,6 @@
-package com.hbelmiro.gcanalizer.parsers;
+package com.hbelmiro.gcanalyzer.parsers;
 
-import com.hbelmiro.gcanalizer.model.PauseFullDuration;
+import com.hbelmiro.gcanalyzer.model.PauseFullDuration;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.math.BigDecimal;

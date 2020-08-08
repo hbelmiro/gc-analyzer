@@ -1,22 +1,27 @@
-package com.hbelmiro.gcanalizer.filters;
+package com.hbelmiro.gcanalyzer.analyzers;
 
+import com.hbelmiro.gcanalyzer.model.PauseFullDuration;
+import com.hbelmiro.gcanalyzer.parsers.PauseFullDurationParser;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @QuarkusTest
-class PauseFullDurationLineFilterTest {
+class MaxPauseFullDurationAnalyzerTest {
 
     @Inject
-    PauseFullDurationLineFilter filter;
+    MaxPauseFullDurationAnalyzer maxPauseFullDurationAnalyzer;
 
     @Test
-    void filter() {
-        List<String> inputLines = List.of(
+    void analize() {
+        List<String> linesToAnalize = List.of(
                 "[2020-08-05T14:32:12.285-0300] GC(1) Pause Young (Metadata GC Threshold) 10M->6M(153M) 6.459ms",
                 "[2020-08-05T14:32:12.285-0300] GC(1) User=0.01s Sys=0.00s Real=0.01s",
                 "[2020-08-05T14:32:12.285-0300] GC(2) Pause Full (Metadata GC Threshold)",
@@ -34,13 +39,21 @@ class PauseFullDurationLineFilterTest {
                 "[2020-08-05T14:32:18.145-0300] GC(8) Pause Young (Allocation Failure)"
         );
 
-        List<String> expectedLines = List.of(
-                "[2020-08-05T14:32:12.313-0300] GC(2) Pause Full (Metadata GC Threshold) 6M->6M(153M) 28.641ms",
-                "[2020-08-05T14:32:15.152-0300] GC(7) Pause Full (Metadata GC Threshold) 33M->32M(217M) 123.234ms"
+        List<PauseFullDuration> expectedOutput = List.of(
+                PauseFullDuration.createPauseFullDuration(
+                        ZonedDateTime.parse("2020-08-05T14:32:15.152-0300",
+                                DateTimeFormatter.ofPattern(PauseFullDurationParser.DATE_TIME_FORMAT)),
+                        Duration.ofNanos(123234000)
+                ),
+                PauseFullDuration.createPauseFullDuration(
+                        ZonedDateTime.parse("2020-08-05T14:32:12.313-0300",
+                                DateTimeFormatter.ofPattern(PauseFullDurationParser.DATE_TIME_FORMAT)),
+                        Duration.ofNanos(28641000)
+                )
         );
 
-        assertThat(this.filter.filter(inputLines))
-                .containsExactlyElementsOf(expectedLines);
+        assertThat(this.maxPauseFullDurationAnalyzer.analize(linesToAnalize))
+                .containsExactlyElementsOf(expectedOutput);
     }
 
 }
