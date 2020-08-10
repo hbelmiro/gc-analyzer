@@ -22,7 +22,7 @@ public class MaxPauseFullDurationAnalyzer {
         this.pauseFullDurationParser = pauseFullDurationParser;
     }
 
-    public List<PauseFullDuration> analize(List<String> lines) {
+    public List<PauseFullDuration> analyze(List<String> lines) {
         List<String> filteredLines = this.pauseFullDurationLineFilter.filter(lines);
 
         return filteredLines.stream()

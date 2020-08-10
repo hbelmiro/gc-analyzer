@@ -20,8 +20,8 @@ class MaxPauseFullDurationAnalyzerTest {
     MaxPauseFullDurationAnalyzer maxPauseFullDurationAnalyzer;
 
     @Test
-    void analize() {
-        List<String> linesToAnalize = List.of(
+    void analyze() {
+        List<String> linesToAnalyze = List.of(
                 "[2020-08-05T14:32:12.285-0300] GC(1) Pause Young (Metadata GC Threshold) 10M->6M(153M) 6.459ms",
                 "[2020-08-05T14:32:12.285-0300] GC(1) User=0.01s Sys=0.00s Real=0.01s",
                 "[2020-08-05T14:32:12.285-0300] GC(2) Pause Full (Metadata GC Threshold)",
@@ -52,7 +52,7 @@ class MaxPauseFullDurationAnalyzerTest {
                 )
         );
 
-        assertThat(this.maxPauseFullDurationAnalyzer.analize(linesToAnalize))
+        assertThat(this.maxPauseFullDurationAnalyzer.analyze(linesToAnalyze))
                 .containsExactlyElementsOf(expectedOutput);
     }
 
