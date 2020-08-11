@@ -23,14 +23,6 @@ public class PauseFullDuration {
         return dateTime;
     }
 
-    @Override
-    public String toString() {
-        return "PauseFullDuration{" +
-                "dateTime=" + dateTime +
-                ", duration=" + duration +
-                '}';
-    }
-
     public Duration getDuration() {
         return duration;
     }
