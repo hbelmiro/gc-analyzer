@@ -15,7 +15,7 @@ There is only one for now. New features will be added in the future. PRs with ne
 
 You can run your application in dev mode that enables live coding using:
 ```
-./mvnw quarkus:dev "-Dquarkus.args=--file=/directory/my_gc.log -n=5"
+./mvnw quarkus:dev "\"-Dquarkus.args=--file=/directory/my_gc.log -n=5\""
 ```
 
 For the sample log in src/main/resources/examples/gc-logs/my_gc.log, an output similar to the following will be printed:
